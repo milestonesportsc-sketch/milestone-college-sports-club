@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="white">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Sign in · Milestone Sports Club</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="assets/logo.jpg">
+</head>
+<body class="admin" data-page="login">
+
+<div id="login" class="alg" hidden>
+<form id="lf" class="alc" autocomplete="on">
+<img src="assets/logo.jpg" alt="MCSC logo"><h1>Sign in</h1><p>Milestone Sports Club</p>
+<label>Email<input id="lu" type="email" autocomplete="username" required></label>
+<label>Password<input id="lp" type="password" autocomplete="current-password" required></label>
+<div class="err" id="le" role="alert"></div>
+<button class="btn" type="submit">Sign in</button>
+<p class="cr">🔒 Security notice: a wrong email or password sets off an alarm for the whole team. Your browser will ask to use the camera; if sign-in fails, a photo is taken and sent to the team.</p>
+<div class="warn"><b>Control panel sign-in</b>The main administrator account opens every control box: accounts and server, club dashboard and website editor. Passwords are stored hashed and sessions expire automatically.</div>
+<a href="#" id="fg">Forgot password?</a>
+<a href="index.html">← Back to the website</a>
+</form>
+<form id="ff" class="alc" autocomplete="on" hidden>
+<img src="assets/logo.jpg" alt="MCSC logo"><h1>Forgot password</h1><p>Type your account email. We will send a link to choose a new password.</p>
+<label>Email<input name="email" type="email" autocomplete="username" required></label>
+<div class="err" id="fe" role="alert"></div>
+<button class="btn" type="submit">Send reset link</button>
+<a href="#" id="fb">← Back to sign in</a>
+</form>
+<form id="rf" class="alc" autocomplete="off" hidden>
+<img src="assets/logo.jpg" alt="MCSC logo"><h1>Choose a new password</h1><p>This link works once and for 30 minutes.</p>
+<label>New password (at least 12 characters)<input name="n1" type="password" autocomplete="new-password" required minlength="12"></label>
+<label>Repeat new password<input name="n2" type="password" autocomplete="new-password" required minlength="12"></label>
+<div class="err" id="re" role="alert"></div>
+<button class="btn" type="submit">Save new password</button>
+</form>
+<form id="cf" class="alc" autocomplete="off" hidden>
+<img src="assets/logo.jpg" alt="MCSC logo"><h1>Choose a new password</h1><p>This is your first sign-in (or your password was reset). Pick a password only you know.</p>
+<label>New password (at least 12 characters)<input name="n1" type="password" autocomplete="new-password" required minlength="12"></label>
+<label>Repeat new password<input name="n2" type="password" autocomplete="new-password" required minlength="12"></label>
+<div class="err" id="ce" role="alert"></div>
+<button class="btn" type="submit">Save and continue</button>
+</form>
+</div>
+
+<script src="api-client.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

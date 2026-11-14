@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><title>Server status · Milestone Sports Club</title>
+<style>
+:root{--g:#0a7a3b;--c:#0b6fa4;--r:#e11d74;--bg:#fff;--t:#111;--m:#5b6470;--l:#e5e9ee}
+@media(prefers-color-scheme:dark){:root{--bg:#0d0f12;--t:#e9edf1;--m:#9aa5b1;--l:#232830;--g:#35c978}}
+body{margin:0;font:15px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--t);padding:16px;max-width:980px;margin-inline:auto}
+h1{font-size:1.3rem;margin:0 0 4px}a{color:var(--c)}small,.m{color:var(--m)}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.k{border:1px solid var(--l);border-radius:10px;padding:10px}.k b{display:block;font-size:1.25rem}
+.ok{color:var(--g)}.bad{color:var(--r)}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 18px}th,td{text-align:left;padding:6px;border-bottom:1px solid var(--l);vertical-align:top;word-break:break-word}
+.w{overflow-x:auto}
+</style></head><body>
+<h1>Server status</h1>
+<small><a href="dba.html">← Database Administrator</a> · auto-refreshes every 10 seconds</small>
+<p id="msg" class="m">Loading…</p>
+<div id="out" hidden>
+<div class="g" id="cards"></div>
+<h2>Recent errors</h2><div class="w"><table id="et"></table></div>
+<h2>Recent activity (audit log)</h2><div class="w"><table id="at"></table></div>
+</div>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+function card(l,v,c){var d=document.createElement('div');d.className='k';var s=document.createElement('small');s.textContent=l;var b=document.createElement('b');b.textContent=v;if(c)b.className=c;d.appendChild(s);d.appendChild(b);return d}
+function fill(t,head,rows){t.textContent='';var tr=document.createElement('tr');head.forEach(function(h){var th=document.createElement('th');th.textContent=h;tr.appendChild(th)});t.appendChild(tr);
+ if(!rows.length){var r=document.createElement('tr'),td=document.createElement('td');td.colSpan=head.length;td.textContent='Nothing yet';td.className='m';r.appendChild(td);t.appendChild(r)}
+ rows.forEach(function(r){var x=document.createElement('tr');r.forEach(function(c){var td=document.createElement('td');td.textContent=c==null?'':String(c);x.appendChild(td)});t.appendChild(x)})}
+function up(s){var d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return(d?d+'d ':'')+h+'h '+m+'m'}
+function load(){
+ var tk=null;try{tk=sessionStorage.getItem('mcsc.token')}catch(e){}
+ if(!tk){$('msg').innerHTML='Please <a href="admin.html">sign in as Database Administrator</a> first.';return}
+ fetch('/api/status',{headers:{Authorization:'Bearer '+tk},cache:'no-store'}).then(function(r){return r.json().then(function(j){return{s:r.status,j:j}})}).then(function(x){
+  if(x.s===401||x.s===403){$('msg').innerHTML=x.s===403?'Only the Database Administrator can see this page.':'Session ended. <a href="admin.html">Sign in again</a>.';$('out').hidden=true;return}
+  if(x.s!==200){$('msg').textContent='Server problem: '+(x.j.error||x.s);$('msg').className='bad';return}
+  var j=x.j,c=j.counters,rq=c.requests||{},tot=0;for(var k in rq)tot+=rq[k];
+  $('msg').textContent='Last checked '+new Date().toLocaleTimeString();$('msg').className='m';$('out').hidden=false;
+  var cd=$('cards');cd.textContent='';
+  [['Health','OK','ok'],['Uptime',up(j.uptimeSec)],['Version',j.version+' · Node '+j.node],['Memory',j.memoryMB+' MB'],['Database',j.dbKB+' KB'],['Requests',tot],['Server errors (5xx)',rq['5xx']||0,(rq['5xx']||0)?'bad':''],
+   ['Errors logged',c.errors,c.errors?'bad':''],['Browser errors',c.clientErrors],['Avg response',c.avgMs+' ms'],['Rate-limited',c.rateLimited],['Logins ok / failed',c.loginOk+' / '+c.loginFail,c.loginFail>10?'bad':''],
+   ['Messages',c.contacts],['Waiting to sync',j.pendingInbox]].forEach(function(a){cd.appendChild(card(a[0],a[1],a[2]))});
+  fill($('et'),['When','Where','Message','Page','Times'],j.errors.map(function(e){return[e.at.replace('T',' ').slice(0,19),e.source,e.message,e.url,e.count]}));
+  fill($('at'),['When','Who','Action','Detail','IP'],j.audit.map(function(e){return[e.at.replace('T',' ').slice(0,19),e.actor,e.action,e.detail,e.ip]}));
+ },function(){$('msg').textContent='Cannot reach the server.';$('msg').className='bad'})}
+load();setInterval(load,10000);
+})();
+</script></body></html>

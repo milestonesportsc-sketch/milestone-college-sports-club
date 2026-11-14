@@ -1,0 +1,35 @@
+# Render.com blueprint: create a "Blueprint" from this repo. The persistent disk keeps the database and photos.
+services:
+  - type: web
+    name: milestone-sports-club
+    runtime: docker
+    plan: starter            # a persistent disk needs a paid plan
+    healthCheckPath: /api/health
+    autoDeploy: true
+    disk:
+      name: mcsc-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: TRUST_PROXY
+        value: "1"
+      - key: DATA_DIR
+        value: /data
+      - key: SECRET
+        generateValue: true  # Render makes a random signing key once; it is kept out of the database and out of backups
+      - key: ADMIN_EMAIL
+        value: milestonesportsc@gmail.com
+      - key: ADMIN_PASSWORD
+        sync: false          # you type a long, strong password in the Render dashboard (never write it in this file)
+      - key: PUBLIC_URL
+        sync: false          # your site address, e.g. https://milestone-sports-club.onrender.com (used in reset emails)
+      - key: SMTP_HOST
+        sync: false          # forgot-password emails, e.g. smtp.gmail.com
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false          # for Gmail: an App password
+      - key: SMTP_FROM
+        sync: false

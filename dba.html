@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="white">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Database Administrator · Milestone Sports Club</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="assets/logo.jpg">
+<style>
+.dtn{display:flex;gap:6px;flex-wrap:wrap}.dtn .btn{padding:6px 10px;font-size:.8rem}
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:12px 0}
+.slot{border:2px solid var(--line);border-radius:16px;padding:16px;background:#fff;display:flex;flex-direction:column;gap:8px}
+.slot.on{border-color:var(--b5);box-shadow:var(--sh)}.slot.off{border-style:dashed;background:var(--b1)}
+.slot .dpill{white-space:nowrap}.slot .sn{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--m);display:flex;justify-content:space-between;align-items:center}
+.slot .big{font-size:1.55rem;font-weight:800;color:var(--b8);letter-spacing:.04em;min-height:2.2rem}.slot.off .big{color:var(--m);font-size:1rem;font-weight:600;letter-spacing:0}
+.slot input{width:100%}.slot .chs{display:flex;gap:6px;flex-wrap:wrap}
+.tgbox{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:6px;background:var(--b1)}
+.tgf{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.tgf .btn{padding:6px 12px;font-size:.8rem}
+.dpill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.78rem;font-weight:700;background:var(--b1);color:var(--b8)}
+.dpill.bad{background:#fde8e8;color:#9b1c1c}.dpill.ok{background:#e3f8ea;color:#0a6b33}
+.dm{color:var(--m);font-size:.85rem}.dcell{word-break:break-word}
+.dform{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}
+.dok{color:#0a7a3b;font-weight:700}.dbad{color:#c0143c;font-weight:700}
+</style>
+</head>
+<body class="admin" data-page="dba">
+
+<div id="app" hidden>
+<aside class="asb" id="sb">
+<div class="abr"><img src="assets/logo.jpg" alt=""><div><b>Database Administrator</b><small>Milestone Sports Club</small></div></div>
+<div class="anv" id="anv">
+<small class="agrp">Server</small>
+<button data-v="overview">🖥️ <span>Server Overview</span></button>
+<button data-v="users">👤 <span>User Accounts</span></button>
+<button data-v="access">🛡️ <span>Access Control</span></button>
+<button data-v="backups">💾 <span>Backups</span></button>
+<button data-v="database">🗄️ <span>Database</span></button>
+<button data-v="security">🚨 <span>Central Security Management</span></button>
+<button data-v="activity">📜 <span>Activity Log</span></button>
+<small class="agrp">Settings</small>
+<button data-v="account">🔑 <span>My Account</span></button>
+<small class="agrp">Role pages</small>
+<a class="alink" href="president.html">👑 <span>President</span></a>
+<a class="alink" href="secretary.html">🗂️ <span>General Secretary</span></a>
+<a class="alink" href="treasurer.html">💰 <span>Treasurer</span></a>
+<a class="alink" href="dashboard.html">📅 <span>Events Coordinator</span></a>
+<a class="alink" href="site-editor.html">✏️ <span>Website editor</span></a>
+<a class="alink" href="treasury.html">🏦 <span>Treasury</span></a>
+<a class="alink" href="index.html" target="_blank" rel="noopener">🌐 <span>View website ↗</span></a>
+<button id="lo">🚪 <span>Logout</span></button>
+</div>
+</aside>
+<div class="ashade" id="sh"></div>
+
+<div class="amain">
+<header class="atop"><button id="hb" type="button" aria-label="Open menu">☰</button><h1 id="ttl">Server Overview</h1><div class="aus"><span id="who"></span></div></header>
+<div class="acon">
+
+<div class="view" id="v-overview" hidden>
+<p class="dm" id="ovm">Loading…</p>
+<div class="astats" id="ovc"></div>
+<div class="apn"><h3>Recent errors</h3><div class="atw"><table id="ove"></table></div></div>
+</div>
+
+<div class="view" id="v-users" hidden>
+<form class="apn" id="nf" autocomplete="off"><h3>Add a person</h3>
+<div class="dform">
+<label>Full name<input name="name" required maxlength="80"></label>
+<label>Email<input name="email" type="email" required maxlength="120"></label>
+<label>Role<select name="role"><option value="president">Club President</option><option value="secretary">General Secretary</option><option value="treasurer">Treasurer</option><option value="coordinator">Event &amp; Sports Coordinator</option><option value="editor">Editor</option><option value="dba">Database Administrator</option></select></label>
+<label>Department<input name="department" maxlength="60" placeholder="e.g. Finance, Events" aria-label="e.g. Finance, Events"></label>
+<label>Temporary password<input name="password" type="text" required minlength="12" autocomplete="off"></label>
+<button class="btn" type="submit">Create account</button>
+</div>
+<p class="cr">The person must choose their own new password the first time they sign in. Give them the temporary password privately.</p>
+</form>
+<div class="atl"><input id="us" type="search" placeholder="Search users…" aria-label="Search users" style="flex:1;min-width:160px"><select id="ur" aria-label="Filter by role"></select></div>
+<div class="atw"><table id="ut"></table></div>
+</div>
+
+<div class="view" id="v-access" hidden>
+<div class="apn"><h3>Server Security &amp; Access Control · Central Security Management</h3>
+<p class="cr">Every person signs in at <b>admin.html</b> and is sent to their own page. The server decides what each role may read and write, so a role cannot go beyond this table even by editing the page. Only the Database Administrator manages accounts, backups, the database and server security.</p>
+<div class="atw"><table id="at"></table></div>
+<p class="cr"><b>What the security alarm covers:</b> sign-in attacks and account security (wrong passwords, unknown accounts, lock-outs, blocked networks, intruder photo and email alerts). It is not a network intrusion detection system, a firewall manager or a server malware scanner.</p></div>
+</div>
+
+<div class="view" id="v-backups" hidden>
+<div class="atl"><button class="btn" id="bn" type="button">+ Create backup now</button><button class="btn g" id="bx" type="button">Download club data (JSON)</button></div>
+<div class="atw"><table id="bt"></table></div>
+<p class="cr">A backup is a full copy of the database file (club data, accounts, activity log). Backups contain password hashes: keep downloaded files private. "Restore" brings back the club data only; accounts and passwords are never changed by a restore, and a safety copy is made first. The newest 30 backups are kept. Photos live in the uploads folder, which is not part of the database file.</p>
+</div>
+
+<div class="view" id="v-database" hidden>
+<div class="astats" id="dbc"></div>
+<div class="agrid2">
+<div class="apn"><h3>Tables</h3><div class="atw"><table id="dbt"></table></div></div>
+<div class="apn"><h3>Club data (counts only)</h3><div class="atw"><table id="dbk"></table></div><div class="btns" style="justify-content:flex-start;margin-top:12px"><button class="btn g" id="dbo" type="button">Check &amp; optimize database</button></div></div>
+</div>
+</div>
+
+<div class="view" id="v-security" hidden>
+<div class="apn"><h3>SERVER SECURITY &amp; ACCESS CONTROL · Central Security Management</h3>
+<p class="cr">One place for every alarm, notification, signed-in device and blocked network of the website. Each line shows whether that protection is working right now.</p>
+<div class="atw"><table id="csm"></table></div></div>
+<div class="apn" id="alp"><h3>📱 Alarm phones · SMS and Telegram photo</h3>
+<p class="cr" id="alst"></p>
+<form id="alf" autocomplete="off"><div class="slots" id="slots"></div>
+<div class="atl"><button class="btn s" type="submit">Save numbers</button><button class="btn s g" id="alt" type="button">Send test alarm to every number</button></div></form>
+<div class="tgbox"><b>Photo straight to the phone (Telegram bot)</b>
+<p class="cr" id="tgst"></p>
+<form id="tgf" class="tgf" autocomplete="off"><input name="token" type="password" placeholder="Bot token from @BotFather (123456789:AA...)" maxlength="80" autocomplete="new-password" style="flex:1;min-width:240px" aria-label="Bot token from @BotFather">
+<button class="btn s" type="submit">Save bot</button><button class="btn s g" id="tgx" type="button">Find chat IDs</button><button class="btn s dng" id="tgd" type="button">Remove bot</button></form>
+<div class="tgf" id="tgl"></div>
+<p class="cr">SMS cannot carry a picture, so the intruder photo goes by Telegram. 1) In Telegram open <b>@BotFather</b>, send <b>/newbot</b>, copy the token here. 2) On each phone open your new bot and press <b>Start</b>. 3) Press <b>Find chat IDs</b> and tap a name to put its ID in a number card above. 4) Save, then press the test button.</p></div>
+<p class="cr">What happens on an alarm: every number gets an SMS at once, then a reminder every 3 minutes (up to 40) until the Database Administrator or Club President presses STOP ALARM. Telegram also gets the photo. SMS sending needs <b>SMS_URL</b> in the server .env file.</p></div>
+<div class="apn"><h3>Alert email (automatic)</h3>
+<p class="cr" id="mst"></p>
+<form id="mf" class="atl" autocomplete="off" style="flex-wrap:wrap">
+<select name="preset" id="mp" aria-label="Mail provider"><option value="">Mail provider…</option><option value="smtp.gmail.com|465">Gmail</option><option value="smtp.mail.yahoo.com|465">Yahoo</option><option value="smtp-mail.outlook.com|587">Outlook / Hotmail</option><option value="smtp-relay.brevo.com|587">Brevo</option><option value="other">Other</option></select>
+<input name="user" type="email" placeholder="Sender email (e.g. club@gmail.com)" required maxlength="120" style="flex:1;min-width:200px" aria-label="Sender email (e.g. club@gmail.com)">
+<input name="pass" type="password" placeholder="App password (leave empty to keep)" maxlength="200" autocomplete="new-password" style="flex:1;min-width:180px" aria-label="App password (leave empty to keep)">
+<input name="host" placeholder="Mail server" maxlength="100" style="flex:1;min-width:150px" aria-label="Mail server"><input name="port" type="number" placeholder="Port" style="width:90px" aria-label="Port">
+<input name="alertTo" placeholder="Also send alerts to (emails, comma separated)" maxlength="300" style="flex:2;min-width:240px" aria-label="Also send alerts to (emails, comma separated)">
+<button class="btn s" type="submit">Save</button><button class="btn s" id="mt" type="button">Send test email</button></form>
+<p class="cr">Gmail: turn on 2-step verification, then create an <b>App password</b> in your Google account and paste it here. Once saved, every alarm, new-device notice and intruder photo is emailed automatically to every active account and to the extra addresses above.</p></div>
+<div class="warn"><b>How the alarm works</b>Every wrong password (or unknown email) is recorded here at once. Everyone who is signed in sees a flashing red alarm with a siren, and every active account gets an email if the mail server is set up (SMTP_* in .env).</div>
+<div class="astats" id="sc"></div>
+<div class="atw"><table id="st"></table></div>
+<div class="apn"><h3>Signed-in devices (every phone, laptop and browser)</h3>
+<p class="cr">Every sign-in is listed here with its device, network and last activity. <b>Remove</b> signs that device out immediately. A new, never-seen device is marked <b>NEW</b> and an email goes to every account.</p>
+<div class="atl"><button class="btn s dng" id="sao" type="button">Sign out every other device</button><button class="btn s" id="sar" type="button">Refresh</button></div>
+<div class="atw"><table id="sdt"></table></div></div>
+<div class="apn"><h3>New-device approval mode</h3>
+<p class="cr" id="dam"></p>
+<div class="atl"><button class="btn s" id="dat" type="button">Turn ON</button></div>
+<p class="cr">When ON, anyone (except the Database Administrator) who enters the correct password on a <b>new device</b> is not let in until you press <b>Approve</b> below. Devices already in use stay allowed, and a person's very first device is allowed automatically.</p>
+<div class="atw"><table id="dpt"></table></div></div>
+<div class="apn"><h3>Blocked devices</h3><p class="cr">A blocked device cannot sign in again, even from another network. <b>Allow again</b> gives permission back.</p><div class="atw"><table id="bdt"></table></div></div>
+<div class="apn"><h3>Login history (every sign-in)</h3><div class="atw"><table id="lht"></table></div></div>
+<div class="apn"><h3>Blocked networks (IP addresses)</h3>
+<form id="bf" class="atl" autocomplete="off"><input name="ip" placeholder="IP address, e.g. 203.0.113.7" required maxlength="45" style="flex:1;min-width:160px" aria-label="IP address, e.g. 203.0.113.7"><input name="reason" placeholder="Reason (optional)" maxlength="120" style="flex:1;min-width:140px" aria-label="Reason (optional)"><button class="btn s dng" type="submit">Block</button></form>
+<div class="atw"><table id="bt2"></table></div></div>
+</div>
+
+<div class="view" id="v-activity" hidden>
+<div class="atl"><input id="af1" type="search" placeholder="Filter by email (exact)…" aria-label="Filter by email (exact)…"><button class="btn" id="afb" type="button">Refresh</button></div>
+<div class="atw"><table id="at"></table></div>
+</div>
+
+<div class="view" id="v-account" hidden>
+<form id="af" class="apn aform"><h3>My account</h3><p class="cr" id="ai"></p>
+<label>Current password<input name="old" type="password" autocomplete="current-password" required></label>
+<label>New password (at least 12 characters)<input name="n1" type="password" autocomplete="new-password" required minlength="12"></label>
+<label>Repeat new password<input name="n2" type="password" autocomplete="new-password" required minlength="12"></label>
+<div class="btns"><button class="btn" type="submit">Change password</button></div>
+<p class="cr">Lost a password? Another Database Administrator can reset it here. If you are the only one, run <code>node scripts/admin.js reset-password you@example.com "NewPass"</code> on the server.</p></form>
+</div>
+
+</div></div></div>
+<div class="atoast" id="ts" role="status"></div>
+
+<script src="api-client.js"></script>
+<script>
+(function(){
+'use strict';
+var $=function(i){return document.getElementById(i)},qa=function(s){return[].slice.call(document.querySelectorAll(s))};
+var VIEWS={overview:'Server Overview',users:'User Accounts',access:'Access Control',security:'Server Security & Access Control · Central Security Management',backups:'Backups',database:'Database',activity:'Activity Log',account:'My Account'},ROLE={dba:'Database Administrator',president:'Club President',secretary:'General Secretary',treasurer:'Treasurer',coordinator:'Event & Sports Coordinator',editor:'Editor'};
+var R={},me=null,timer=null;
+function toast(m){var t=$('ts');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(function(){t.classList.remove('on')},3200)}
+function el(tag,txt,cls){var e=document.createElement(tag);if(txt!=null)e.textContent=txt;if(cls)e.className=cls;return e}
+function leave(){MCSC.logout();location.replace('admin.html')}
+function call(m,p,b){return MCSC.api(m,p,b).then(function(r){if(r.status===401){leave();throw 0}if(!r.ok&&r.status!==0)toast(r.data.error||'Something went wrong');return r})}
+function when(s){return s?String(s).replace('T',' ').slice(0,16):'never'}
+function fill(t,head,rows){t.textContent='';var tr=el('tr');head.forEach(function(h){tr.appendChild(el('th',h))});t.appendChild(tr);
+ if(!rows.length){var r=el('tr'),td=el('td','Nothing yet','dm');td.colSpan=head.length;r.appendChild(td);t.appendChild(r)}
+ rows.forEach(function(row){var x=el('tr');row.forEach(function(c){var td=el('td',null,'dcell');if(c&&c.nodeType)td.appendChild(c);else td.textContent=c==null?'':String(c);x.appendChild(td)});t.appendChild(x)})}
+function btn(label,fn,cls){var b=el('button',label,'btn s '+(cls||'g'));b.type='button';b.onclick=fn;return b}
+function stat(l,v,s){var d=el('div',null,'ast'),i=el('div');i.appendChild(el('small',l));i.appendChild(el('b',v));if(s)i.appendChild(el('em',s));d.appendChild(i);return d}
+function up(s){var d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return(d?d+'d ':'')+h+'h '+m+'m'}
+function save(name,blob){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000)}
+function download(path,name){fetch('/api'+path,{headers:{Authorization:'Bearer '+MCSC.token()},cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){save(name,b)},function(){toast('Download failed')})}
+
+/* ---- overview ---- */
+R.overview=function(){call('GET','/status').then(function(r){if(!r.ok)return;var j=r.data,c=j.counters,rq=c.requests||{},tot=0;for(var k in rq)tot+=rq[k];
+ $('ovm').textContent='Last checked '+new Date().toLocaleTimeString()+' · refreshes every 10 seconds';
+ var g=$('ovc');g.textContent='';
+ [['Server','Healthy','up '+up(j.uptimeSec)],['Version','v'+j.version,'Node '+j.node],['Memory',j.memoryMB+' MB',''],['Database',j.dbKB+' KB',''],['Requests',tot,'avg '+c.avgMs+' ms'],
+  ['Server errors',rq['5xx']||0,c.errors+' logged'],['Sign-ins ok / failed',c.loginOk+' / '+c.loginFail,''],['Rate-limited',c.rateLimited,'']].forEach(function(a){g.appendChild(stat(a[0],a[1],a[2]))});
+ fill($('ove'),['When','Where','Message','Page','Times'],j.errors.map(function(e){return[when(e.at),e.source,e.message,e.url,e.count]}))})};
+
+/* ---- users ---- */
+function userRow(u){
+ var sel=el('select');['president','secretary','treasurer','coordinator','editor','dba'].forEach(function(r){var o=el('option',ROLE[r]);o.value=r;if(r===u.role)o.selected=true;sel.appendChild(o)});
+ var self=u.id===me.id;sel.disabled=self;sel.onchange=function(){patch(u,{role:sel.value},'Role changed. '+u.email+' was signed out.')};
+ var a=el('div',null,'dtn');
+ if(!self){a.appendChild(btn(u.active?'Disable':'Enable',function(){patch(u,{active:!u.active},u.active?'Account disabled':'Account enabled')}));
+  a.appendChild(btn('Reset password',function(){var p=prompt('Temporary password for '+u.email+' (at least 12 characters). They must change it at next sign-in.');if(p)patch(u,{password:p},'Password reset')}));
+  a.appendChild(btn('Delete',function(){if(confirm('Delete the account '+u.email+'? This cannot be undone.'))call('DELETE','/users/'+u.id).then(function(r){if(r.ok){toast('Account deleted');R.users()}})},'dng'))}
+ var st=el('span',u.active?(u.mustChange?'Waiting for first sign-in':'Active'):'Disabled','dpill '+(u.active?'ok':'bad'));
+ return[u.name+(self?' (you)':''),u.email,sel,st,when(u.lastLogin),a,userDept(u)]}
+function patch(u,b,msg){call('PATCH','/users/'+u.id,b).then(function(r){if(r.ok)toast(msg);R.users()})}
+var UL=[];
+function drawUsers(){var q=$('us').value.trim().toLowerCase(),f=$('ur').value;
+ fill($('ut'),['Name','Email','Role','Department','Last sign-in','Status','Actions'],UL.filter(function(u){return(!f||u.role===f)&&(!q||(u.name+' '+u.email+' '+(u.department||'')).toLowerCase().indexOf(q)>=0)}).map(function(u){var r=userRow(u);return[r[0],r[1],r[2],r[6],r[4],r[3],r[5]]}))}
+function userDept(u){var i=el('input');i.value=u.department||'';i.maxLength=60;i.placeholder='Department';i.onchange=function(){patch(u,{department:i.value},'Department saved')};return i}
+R.access=function(){var rows=[
+ ['Database Administrator','dba.html','Accounts, backups, database, security center, activity log, server health','Everything: all club pages and the whole website'],
+ ['Club President','president.html','Members, events, payments, tour budget, leadership team, messages','Website text and look, photo gallery, announcements, fee and payment numbers'],
+ ['General Secretary','secretary.html','Members, leadership team, messages','Website text and look, photo gallery, announcements'],
+ ['Treasurer','treasurer.html','Payments, tour budget','Fee and payment numbers shown on the website, announcements'],
+ ['Event & Sports Coordinator','dashboard.html','Events','Events shown on the website'],
+ ['Editor','site-editor.html','Nothing in the club records','Website text and look, photo gallery, announcements']];
+ fill($('at'),['Role','Own page','Club control','Website control'],rows.map(function(r){var a=el('a',r[1]);a.href=r[1];return[r[0],a,r[2],r[3]]}))};
+R.users=function(){var s=$('ur');if(!s.options.length){var o=el('option','All Roles');o.value='';s.appendChild(o);['dba','president','secretary','treasurer','coordinator','editor'].forEach(function(r){var x=el('option',ROLE[r]);x.value=r;s.appendChild(x)});s.onchange=drawUsers;$('us').oninput=drawUsers}
+ call('GET','/users').then(function(r){if(r.ok){UL=r.data.users;drawUsers()}})};
+$('nf').onsubmit=function(e){e.preventDefault();var f=this.elements;
+ call('POST','/users',{name:f.name.value,email:f.email.value,role:f.role.value,department:f.department.value,password:f.password.value}).then(function(r){if(r.ok){toast('Account created for '+f.email.value);$('nf').reset();R.users()}})};
+
+/* ---- backups ---- */
+R.backups=function(){call('GET','/backups').then(function(r){if(!r.ok)return;
+ fill($('bt'),['Backup','Created','Size','Actions'],r.data.backups.map(function(b){var a=el('div',null,'dtn');
+  a.appendChild(btn('Download',function(){download('/backups/'+b.name+'/download',b.name)}));
+  a.appendChild(btn('Restore club data',function(){if(confirm('Replace the CURRENT club data (members, events, payments, gallery list...) with this backup?\n\nA safety copy of today\'s data is made first. Accounts are not changed.'))call('POST','/backups/'+b.name+'/restore',{confirm:'RESTORE'}).then(function(x){if(x.ok){toast('Restored. Safety copy: '+x.data.safetyBackup);R.backups()}})},'dng'));
+  a.appendChild(btn('Delete',function(){if(confirm('Delete this backup file?'))call('DELETE','/backups/'+b.name).then(function(x){if(x.ok)R.backups()})},'dng'));
+  return[b.name,when(b.created),b.sizeKB+' KB',a]}))})};
+$('bn').onclick=function(){call('POST','/backups',{}).then(function(r){if(r.ok){toast('Backup created');R.backups()}})};
+$('bx').onclick=function(){download('/db/export','mcsc-club-data.json')};
+
+/* ---- database ---- */
+R.database=function(){call('GET','/db/info').then(function(r){if(!r.ok)return;var j=r.data,g=$('dbc');g.textContent='';
+ var ok=j.integrity==='ok';var s=stat('Integrity check',ok?'OK':j.integrity);s.querySelector('b').className=ok?'dok':'dbad';
+ g.appendChild(s);g.appendChild(stat('Database file',j.dbKB+' KB','journal '+j.walKB+' KB'));g.appendChild(stat('Uploaded photos',Math.round(j.uploadsKB/1024*10)/10+' MB'));g.appendChild(stat('Club data version','#'+j.stateVersion));
+ fill($('dbt'),['Table','Rows'],j.tables.map(function(t){return[t.name,t.rows]}));fill($('dbk'),['List','Items'],j.club.map(function(t){return[t.name,t.rows]}))})};
+$('dbo').onclick=function(){call('POST','/db/optimize',{}).then(function(r){if(r.ok){toast('Database checked and optimized');R.database()}})};
+
+/* ---- security center ---- */
+R.csm=function(devs,blocked){call('GET','/status').then(function(s){if(!s.ok)return;var j=s.data,on='\u2705 ON',off='\u26A0\uFE0F NOT SET UP';
+ fill($('csm'),['Protection','Status','Detail'],[
+ ['Wrong-password alarm (banner + siren)',on,'Every wrong password or unknown email is recorded and shown to everyone signed in'],
+ ['Intruder photo',on,'Taken when the person allows the camera, shown in the alarm list'],
+ ['Email notification (alarms + photos)',j.emailAlerts?(j.mailError?'\u26A0\uFE0F PROBLEM':on):off,j.emailAlerts?(j.mailError?j.mailError:'Alert emails and intruder photos go to every active account automatically'):'Fill the "Alert email" form below once'],
+ ['SMS to security numbers',j.smsAlerts?on:off,j.smsAlerts?(j.smsNumbers+' number(s) get an SMS at once and a reminder every 3 minutes until the alarm is stopped'):'Needs SMS_URL in .env and at least one number below'],
+ ['Intruder photo on the phone (Telegram)',j.telegramAlerts?on:off,j.telegramAlerts?'Photo and alarm text go straight to Telegram':'Set up the Telegram bot below (SMS cannot carry a photo)'],
+ ['Block a device or network',on,'Remove, Block device, Block device + network, Allow again'],
+ ['Give permission back (unlock)',on,'Allow again for devices and networks; unlock a locked account'],
+ ['Lock-out after repeated wrong passwords',on,'5 wrong tries lock that network, 15 lock the account, for 15 minutes'],
+ ['New-device login alert',j.emailAlerts?on:'\u2705 ON (list only, no email)','A device never seen before is marked NEW and logged'],
+ ['New-device approval mode',on,'Optional: a new device needs your Approve before it can sign in (Security Center)'],
+ ['Automatic block after wrong passwords',on,'After 5 wrong passwords the network AND the device are blocked until you press Allow again'],
+ ['Signed-in devices (see and remove)',on,devs+' device(s) signed in now'],
+ ['Blocked networks (IP)',on,blocked+' network(s) blocked'],
+ ['Role-based access control',on,'The server decides what each role may read and write'],
+ ['Activity log (audit)',on,'Every sign-in, sign-out, removal and block is recorded']])})};
+R.devices=function(){call('GET','/sessions').then(function(r){if(!r.ok)return;R.csm(r.data.sessions.length,R._bl||0);fill($('sdt'),['Who','Device','Network (IP)','Signed in','Last active','Action'],r.data.sessions.map(function(x){
+ var act='\u2014';if(!x.current){act=el('span');act.appendChild(btn('Remove',function(){if(confirm('Sign out '+x.email+' on '+x.label+'?'))call('DELETE','/sessions/'+encodeURIComponent(x.id)).then(function(z){if(z.ok){toast('Device removed');R.devices()}})},'dng'));act.appendChild(btn('Block device',function(){if(confirm('Sign out and BLOCK this device? It cannot sign in again until you allow it.'))call('POST','/sessions/'+encodeURIComponent(x.id)+'/block',{blockIp:false}).then(function(z){if(z.ok){toast('Device blocked');R.security()}else toast(z.data.error||'Failed')})},'dng'));act.appendChild(btn('Block device + network',function(){if(confirm('Block this device AND its network '+x.ip+'? Everyone on the same Wi-Fi/network is blocked too.'))call('POST','/sessions/'+encodeURIComponent(x.id)+'/block',{blockIp:true}).then(function(z){if(z.ok){toast('Device and network blocked');R.security()}else toast(z.data.error||'Failed')})},'dng'))}
+ return[x.email+' ('+x.role+')'+(x.current?' \u2014 this device':''),x.label+(x.new_dev?' \u2014 NEW':''),x.ip,when(x.created),when(x.last_seen),act]}))});
+ call('GET','/sessions?history=1').then(function(r){if(r.ok)fill($('lht'),['When','Who','Device','Network (IP)','Device ID','Status'],r.data.history.map(function(x){return[when(x.created),x.email+' ('+x.role+')',x.label+(x.new_dev?' \u2014 NEW':''),x.ip,x.did?x.did.slice(0,8):'\u2014',x.status]}))});
+ call('GET','/blocked-devices').then(function(r){if(r.ok)fill($('bdt'),['Device','Network','Blocked on','By','Action'],r.data.devices.map(function(b){return[(b.label||'device')+' ('+b.did.slice(0,8)+')',b.ip||'\u2014',when(b.at),b.by,btn('Allow again',function(){call('DELETE','/blocked-devices/'+encodeURIComponent(b.did)).then(function(z){if(z.ok){toast('Device allowed again');R.devices()}})})]}))})};
+R.approval=function(){call('GET','/device-approval').then(function(r){if(!r.ok)return;var d=r.data;$('dam').textContent=d.enabled?'\u2705 Approval mode is ON. '+d.pending.filter(function(x){return x.status==='pending'}).length+' request(s) waiting.':'Approval mode is OFF: any device with the right password can sign in (you are still alerted about NEW devices).';
+ $('dat').textContent=d.enabled?'Turn OFF':'Turn ON';$('dat').onclick=function(){call('PUT','/device-approval',{enabled:!d.enabled}).then(function(z){if(z.ok){toast(d.enabled?'Approval mode OFF':'Approval mode ON');R.approval()}else toast(z.data.error||'Failed')})};
+ fill($('dpt'),['Who','Device','Network (IP)','When','Status','Action'],d.pending.map(function(x){var c=el('span');
+  if(x.status==='pending')c.appendChild(btn('Approve',function(){call('POST','/pending-devices/'+x.id+'/approve',{}).then(function(z){if(z.ok){toast('Approved: '+x.email+' can sign in from this device');R.approval()}else toast(z.data.error||'Failed')})}));
+  c.appendChild(btn(x.status==='pending'?'Deny':'Approve instead',function(){call('POST','/pending-devices/'+x.id+(x.status==='pending'?'/deny':'/approve'),{}).then(function(z){if(z.ok)R.approval()})},x.status==='pending'?'dng':''));
+  c.appendChild(btn('Clear',function(){call('DELETE','/pending-devices/'+x.id).then(function(z){if(z.ok)R.approval()})}));
+  return[x.email,x.label,x.ip,when(x.at),x.status==='pending'?'\u23F3 Waiting':'\u26D4 Denied',c]}))})};
+function fmtPh(p){return p&&p.length===11?p.slice(0,5)+'-'+p.slice(5):p}
+R.phones=function(){call('GET','/alert-phones').then(function(r){if(!r.ok)return;var d=r.data,box=$('slots');box.textContent='';
+ d.slots.forEach(function(x,i){var on=!!x.phone,c=el('div',null,'slot '+(on?'on':'off'));
+  var h=el('div',null,'sn');h.appendChild(el('span','Security number '+(i+1)));h.appendChild(el('span',on?'\u2705 ACTIVE':'\u2014 RESERVED','dpill'));c.appendChild(h);
+  var big=el('div',on?fmtPh(x.phone):'Empty: add a number here',null);big.className='big';big.id='big'+i;c.appendChild(big);
+  var lb=el('input');lb.name='label'+i;lb.placeholder='Name (e.g. President)';lb.maxLength=40;lb.value=on?x.label:'';lb.setAttribute('aria-label','Name for number '+(i+1));
+  var ph=el('input');ph.name='phone'+i;ph.type='tel';ph.inputMode='numeric';ph.placeholder='01XXXXXXXXX';ph.maxLength=20;ph.value=x.phone;ph.setAttribute('aria-label','Phone number '+(i+1));
+  ph.oninput=function(){var v=ph.value.replace(/\D/g,'');big.textContent=v?fmtPh(v):'Empty: add a number here';c.className='slot '+(v?'on':'off')};
+  var tc=el('input');tc.name='tg'+i;tc.inputMode='numeric';tc.placeholder='Telegram chat ID (for the photo)';tc.maxLength=24;tc.value=x.telegram;tc.setAttribute('aria-label','Telegram chat ID '+(i+1));
+  c.appendChild(lb);c.appendChild(ph);c.appendChild(tc);box.appendChild(c)});
+ var n=d.slots.filter(function(x){return x.phone}).length;
+ $('alst').textContent=n+' of '+d.max+' numbers filled.'+(d.sms.lastError?'  Last SMS problem: '+d.sms.lastError:(d.sms.lastOk?'  Last SMS sent: '+when(d.sms.lastOk):''));
+ $('tgst').textContent=d.telegram.hasToken?('\u2705 Bot saved. '+d.telegram.chats+' phone(s) will receive the photo.'+(d.telegram.lastError?'  Last problem: '+d.telegram.lastError:(d.telegram.lastOk?'  Last sent: '+when(d.telegram.lastOk):''))):'Optional: add a Telegram bot below to receive the intruder photo on the phone.'})};
+$('alf').onsubmit=function(e){e.preventDefault();var f=this.elements,sl=[];for(var i=0;i<3;i++)sl.push({label:f['label'+i].value,phone:f['phone'+i].value,telegram:f['tg'+i].value});
+ call('PUT','/alert-phones',{slots:sl}).then(function(r){if(r.ok){toast('Numbers saved');R.phones();R.devices()}})};
+$('alt').onclick=function(){toast('Sending test\u2026');call('POST','/alert-test',{}).then(function(r){if(!r.ok)return;var d=r.data,ok=d.sms.filter(function(x){return x.ok}).length,bad=d.sms.concat(d.telegram).filter(function(x){return !x.ok});
+ toast((d.smsGateway?'SMS sent to '+ok+' number(s). ':'No SMS gateway set. ')+(d.telegramReady?'Telegram: '+d.telegram.filter(function(x){return x.ok}).length+' sent. ':'')+(bad.length?'Problem: '+bad[0].error:''));R.phones()})};
+$('tgf').onsubmit=function(e){e.preventDefault();var f=this.elements;call('PUT','/telegram',{token:f.token.value}).then(function(r){if(r.ok){f.token.value='';toast('Bot saved: @'+r.data.bot);R.phones()}})};
+$('tgd').onclick=function(){if(confirm('Remove the Telegram bot? Photos will no longer reach the phones.'))call('DELETE','/telegram').then(function(r){if(r.ok){toast('Bot removed');R.phones()}})};
+$('tgx').onclick=function(){var l=$('tgl');l.textContent='';call('POST','/telegram/find',{}).then(function(r){if(!r.ok)return;if(!r.data.chats.length){l.appendChild(el('span','Nobody yet. Open your bot in Telegram, press Start, then try again.','cr'));return}
+ r.data.chats.forEach(function(c){var b=btn(c.name+' \u00B7 '+c.id,function(){var f=$('alf').elements;for(var i=0;i<3;i++)if(!f['tg'+i].value){f['tg'+i].value=c.id;toast('ID put in number card '+(i+1)+'. Press Save numbers.');return}toast('All 3 cards already have a chat ID')});l.appendChild(b)})})};
+R.mail=function(){call('GET','/mail-settings').then(function(r){if(!r.ok)return;var d=r.data,f=$('mf').elements;f.user.value=d.user||'';f.host.value=d.host||'';f.port.value=d.port||'';f.alertTo.value=(d.alertTo||[]).join(', ');f.pass.value='';
+ if(d.source==='none'){f.user.value='Milestonesportsc@gmail.com';f.host.value='smtp.gmail.com';f.port.value=465;f.alertTo.value='Milestonesportsc@gmail.com';$('mp').value='smtp.gmail.com|465'}
+ $('mst').textContent=(d.source==='none'?'\u26A0\uFE0F Email is not set up yet. Fill the form below once and everything becomes automatic.':'\u2705 Email set up ('+d.source+').')+(d.lastError?'  Last problem: '+d.lastError:(d.lastOk?'  Last email sent: '+when(d.lastOk):''))})};
+$('mp').onchange=function(){var v=this.value.split('|');if(v.length===2){var f=$('mf').elements;f.host.value=v[0];f.port.value=v[1]}};
+$('mf').onsubmit=function(e){e.preventDefault();var f=this.elements;call('PUT','/mail-settings',{host:f.host.value,port:f.port.value,user:f.user.value,pass:f.pass.value,alertTo:f.alertTo.value}).then(function(r){if(r.ok){toast('Email settings saved');R.mail();R.devices()}else toast(r.data.error||'Not saved')})};
+$('mt').onclick=function(){toast('Sending test email\u2026');call('POST','/mail-test',{}).then(function(r){if(!r.ok){toast(r.data.error||'Test failed');return}toast(r.data.sent?('Test email sent to '+r.data.sent+' address(es)'+(r.data.failed.length?'. Problem: '+r.data.failed[0]:'')):('Test failed: '+(r.data.failed[0]||'unknown problem')));R.mail()})};
+$('sao').onclick=function(){if(confirm('Sign out every device except this one?'))call('POST','/sessions/revoke-others',{}).then(function(z){if(z.ok){toast('Signed out '+z.data.removed+' device(s)');R.devices()}})};
+$('sar').onclick=function(){R.devices()};
+var KIND={wrong_password:'Wrong password',unknown_account:'Unknown email',lockout:'Account locked',blocked_device:'Blocked device tried to sign in',device_pending:'New device waiting for approval',ip_auto_blocked:'Network blocked automatically'};
+function blockIp(ip,reason){call('POST','/blocked',{ip:ip,reason:reason||''}).then(function(r){if(r.ok){toast('Blocked '+ip);R.security()}})}
+R.security=function(){R.devices();R.phones();R.mail();R.approval();call('GET','/alerts?since=0').then(function(r){if(!r.ok)return;var a=r.data.alerts,day=Date.now()-864e5,g=$('sc');g.textContent='';
+ var d24=a.filter(function(x){return new Date(x.at).getTime()>day});
+ g.appendChild(stat('Alarms, last 24 hours',d24.length));g.appendChild(stat('Locked accounts',d24.filter(function(x){return x.kind==='lockout'}).length));g.appendChild(stat('Different networks',Object.keys(d24.reduce(function(m,x){m[x.ip]=1;return m},{})).length));g.appendChild(stat('Photos taken',a.filter(function(x){return x.photo}).length));
+ fill($('st'),['Photo','When','What','Account tried','Network','Action'],a.map(function(x){var ph;if(x.photo){ph=el('img');ph.alt='Photo of the person';ph.style.cssText='height:56px;border-radius:6px;cursor:zoom-in';ph.onclick=function(){window.open(ph.src,'_blank','noopener')};MCSC.loadPhoto(x.id,ph)}else ph='—';
+  return[ph,when(x.at),KIND[x.kind]||x.kind,x.email,x.ip,(function(){var c=el('span');c.appendChild(btn('Block this network',function(){if(confirm('Block all sign-ins from '+x.ip+'?'))blockIp(x.ip,'from alarm #'+x.id)},'dng'));if(x.did)c.appendChild(btn('Block this device',function(){if(confirm('Block the device that made this attempt? It cannot connect again even from another network.'))call('POST','/blocked-devices',{did:x.did,ip:x.ip,reason:'from alarm #'+x.id}).then(function(z){if(z.ok){toast('Device blocked');R.security()}else toast(z.data.error||'Failed')})},'dng'));if(x.kind==='lockout'||x.kind==='wrong_password')c.appendChild(btn('Allow this person (unlock)',function(){call('POST','/unlock',{email:x.email}).then(function(z){toast(z.ok?'Unlocked: '+x.email+' can try again':(z.data.error||'Failed'))})}));return c})()]}))});
+ call('GET','/blocked').then(function(r){if(r.ok){R._bl=r.data.blocked.length;if(R.csm)R.devices()}if(r.ok)fill($('bt2'),['Network','Blocked on','By','Reason','Action'],r.data.blocked.map(function(b){return[b.ip,when(b.at),b.by,b.reason,btn('Unblock',function(){call('DELETE','/blocked/'+encodeURIComponent(b.ip)).then(function(x){if(x.ok){toast('Unblocked');R.security()}})})]}))})};
+$('bf').onsubmit=function(e){e.preventDefault();var f=this.elements;blockIp(f.ip.value.trim(),f.reason.value);this.reset()};
+
+/* ---- activity ---- */
+R.activity=function(){var who=$('af1').value.trim().toLowerCase();call('GET','/audit?limit=200'+(who?'&actor='+encodeURIComponent(who):'')).then(function(r){if(r.ok)fill($('at'),['When','Who','Action','Detail','IP'],r.data.audit.map(function(e){return[when(e.at),e.actor,e.action,e.detail,e.ip]}))})};
+$('afb').onclick=R.activity;$('af1').onkeydown=function(e){if(e.key==='Enter')R.activity()};
+
+/* ---- account ---- */
+R.account=function(){$('af').reset()};
+$('af').onsubmit=function(e){e.preventDefault();var f=this.elements;if(f.n1.value!==f.n2.value){toast('The two new passwords are not the same');return}
+ MCSC.changePassword(f.old.value,f.n1.value).then(function(r){if(r.ok){$('af').reset();toast('Password changed. Other devices were signed out.')}else toast(r.data.error||'Password was not changed')})};
+
+/* ---- navigation ---- */
+function route(){var v=location.hash.slice(1);if(!VIEWS[v])v='overview';
+ qa('.view').forEach(function(x){x.hidden=x.id!=='v-'+v});qa('#anv button[data-v]').forEach(function(b){b.classList.toggle('on',b.dataset.v===v)});
+ $('ttl').textContent=VIEWS[v];document.body.classList.remove('so');clearInterval(timer);R[v]();if(v==='overview')timer=setInterval(function(){if(document.visibilityState==='visible')R.overview()},10000);window.scrollTo(0,0)}
+qa('#anv button[data-v]').forEach(function(b){b.onclick=function(){if(location.hash.slice(1)===b.dataset.v)route();else location.hash=b.dataset.v}});
+addEventListener('hashchange',function(){if(me)route()});
+$('hb').onclick=function(){document.body.classList.toggle('so')};$('sh').onclick=function(){document.body.classList.remove('so')};
+$('lo').onclick=leave;
+
+MCSC.ready.then(function(on){
+ if(!on||!MCSC.token()){location.replace('admin.html');return}
+ MCSC.api('GET','/me').then(function(r){
+  if(!r.ok||r.data.mustChange){leave();return}
+  if(r.data.role!=='dba'){location.replace({president:'dashboard.html',secretary:'dashboard.html',treasurer:'dashboard.html',coordinator:'dashboard.html',editor:'site-editor.html'}[r.data.role]||'admin.html');return}
+  me=r.data;$('who').textContent=me.name;$('ai').textContent=me.name+' · '+me.email;$('app').hidden=false;route()})});
+})();
+</script>
+</body>
+</html>

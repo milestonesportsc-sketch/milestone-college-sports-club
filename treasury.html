@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="white">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Treasury · Milestone Sports Club</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="assets/logo.jpg">
+</head>
+<body class="admin" data-page="treasury">
+<div id="app" hidden>
+<div class="amain" style="margin-left:0">
+<header class="atop"><h1>🏦 Treasury</h1><div class="aus"><a id="back" href="admin.html">← Back to my dashboard</a></div></header>
+<div class="acon">
+
+<div class="warn awarn" id="frz" hidden><span><b>TREASURY FROZEN</b><span id="frzWhy"></span></span></div>
+
+<div class="apn aform">
+<h3>Your password</h3>
+<p class="cr" style="margin:0">Needed again for every approval, check and payout record. It is sent only to the server and is never stored on this page.</p>
+<label>Password<input id="pw" type="password" autocomplete="current-password"></label>
+</div>
+
+<div class="achips" id="bal"></div>
+<div class="apn"><h3>Safety status</h3><div class="alist" id="st"></div>
+<div class="atl" style="margin-top:12px">
+<button class="btn s dng" id="bFreeze" type="button">🛑 Emergency freeze</button>
+<button class="btn s g" id="bMem" type="button"></button>
+<button class="btn s g" id="bInt" type="button">Check ledger integrity</button>
+</div></div>
+
+<div class="apn aform" id="rcBox"><h3>1. Compare with the real wallet</h3>
+<p class="cr" style="margin:0">The website's ledger is not the real bKash/Nagad balance. Open the real wallet, type the balance you see. If the wallet holds LESS than the ledger, the treasury freezes itself. A payout is allowed only after a recent comparison.</p>
+<div class="a2"><label>Wallet<select id="rcW"><option value="bkash">bKash</option><option value="nagad">Nagad</option></select></label><label>Real balance (৳)<input id="rcB" type="number" min="0"></label></div>
+<div class="btns"><button class="btn" id="bRc" type="button">Compare</button></div><p class="cr" id="rcOut"></p></div>
+
+<div class="apn"><h3>2. Membership payments to check</h3>
+<p class="cr" style="margin:0 0 10px">Treasurer checks first, then the President or General Secretary checks. Both type the amount shown in the real statement. Where the gateway is connected, one press checks it automatically.</p>
+<div class="atw"><table id="tPay"></table></div></div>
+
+<div class="apn aform" id="wdBox"><h3>3. Ask to send money out</h3>
+<p class="cr" style="margin:0">Nothing is sent until the President, General Secretary and Treasurer have all approved.</p>
+<div class="a2"><label>From wallet<select id="wdW"><option value="bkash">bKash</option><option value="nagad">Nagad</option></select></label><label>Amount (৳)<input id="wdA" type="number" min="1"></label></div>
+<div class="a2"><label>To (mobile number)<input id="wdT" inputmode="numeric" maxlength="11"></label><label>Reason<input id="wdR" maxlength="200"></label></div>
+<div class="btns"><button class="btn" id="bWd" type="button">Send for approval</button></div></div>
+
+<div class="apn"><h3>Requests</h3><div class="atw"><table id="tReq"></table></div>
+<div class="atl" style="margin-top:12px"><button class="btn s g" id="bLim" type="button">Request new limits</button><button class="btn s g" id="bUnf" type="button">Request unfreeze</button></div></div>
+
+<div class="apn"><h3>Ledger (money in and out)</h3><div class="atw"><table id="tLed"></table></div></div>
+<div class="apn"><h3>Audit log (permanent)</h3><div class="atw"><table id="tAud"></table></div></div>
+</div></div></div>
+<div class="atoast" id="ts" role="status"></div>
+<script src="treasury-ui.js"></script>
+</body>
+</html>

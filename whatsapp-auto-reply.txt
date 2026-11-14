@@ -1,0 +1,134 @@
+WHATSAPP AUTO-REPLY / হোয়াটসঅ্যাপ অটো-রিপ্লাই
+
+Use the free WhatsApp Business app on the club phone:
+  Settings > Business tools > Greeting message  -> paste the GREETING below and turn it on.
+  Settings > Business tools > Quick replies     -> add each text below with a shortcut (e.g. /leaders).
+Fill in the [number] gaps before pasting. This replies automatically with text. A real two-way
+AI bot on WhatsApp needs the WhatsApp Business Platform and a server, which is not included.
+
+===== GREETING =====
+আসসালামু আলাইকুম! আমি সাবিহা, মিলস্টোন কলেজ স্পোর্টস ক্লাবের সহকারী। আমি কি আপনাকে কোনো সাহায্য করতে পারি?
+প্রয়োজনীয় তথ্য পেতে লিখুন: /leaders (লিডার), /fee (সদস্যপদ ফি), /play (কীভাবে খেলবেন), /where (কোথায় কী পাবেন), /contact (কার সাথে কথা বলবেন)।
+
+Assalamu Alaikum! I am Sabiha, the assistant of Milestone Sports Club. Can I help you with anything?
+Type: /leaders, /fee, /play, /where, /contact.
+
+===== QUICK REPLY /leaders (Bangla) =====
+ক্লাবের লিডারগণ:
+শিক্ষার্থী নেতৃত্ব টিম
+• সভাপতি: মাহি ইসলাম প্রান্ত
+• উপদেষ্টা: রাকিবুল ইসলাম আবিদ
+• সহ-সভাপতি: মো. নাজমুল ইসলাম
+• সাধারণ সম্পাদক (জিএস): আব্দুর রহমান মাহি
+• সাংগঠনিক সম্পাদক: ঋদিতা মীম
+• যুগ্ম সম্পাদক: অর্ণব মাতব্বর
+
+আরও তথ্যের জন্য যাঁদের সাথে কথা বলবেন:
+• ক্লাব সম্পর্কে সাধারণ তথ্য: উপদেষ্টা রাকিবুল ইসলাম আবিদ অথবা সভাপতি মাহি ইসলাম প্রান্ত
+• সদস্যপদ ও পেমেন্ট: সাধারণ সম্পাদক আব্দুর রহমান মাহি অথবা যুগ্ম সম্পাদক অর্ণব মাতব্বর
+• ইভেন্ট, নোটিশ ও অনুষ্ঠান: সাংগঠনিক সম্পাদক ঋদিতা মীম
+• খেলার অনুশীলন ও টিম: সহ-সভাপতিগণ মো. নাজমুল ইসলাম
+অথবা ফোন করুন 02-48963437, 02-58957733, 01340340744, 01872402890 / ইমেইল milestonecollege1056@gmail.com।
+
+===== QUICK REPLY /leaders (English) =====
+Club leaders:
+Students Leadership Team
+• President: Mahi Islam Pranto
+• Advisor: Rakibul Islam Abid
+• Vice President: Md. Nazmul Islam
+• General Secretary (GS): Abdur Rahman Mahi
+• Organizing Secretary: Ridita Mim
+• Joint Secretary: Arnov Matabber
+
+For more information, talk to:
+• About the club (general): Advisor Rakibul Islam Abid or President Mahi Islam Pranto
+• Membership & payment: General Secretary Abdur Rahman Mahi or Joint Secretary Arnov Matabber
+• Events, notices & programmes: Organizing Secretary Ridita Mim
+• Sports practice & teams: Vice Presidents Md. Nazmul Islam
+Or call 02-48963437, 02-58957733, 01340340744, 01872402890 / email milestonecollege1056@gmail.com.
+
+===== QUICK REPLY /fee (Bangla) =====
+সদস্যপদ ফি: ৳350।
+যেভাবে যোগ দেবেন: ১) বিকাশ, নগদ বা রকেট বেছে নিয়ে ৳350 পাঠান — বিকাশ 01340340744, নগদ 01340340744, রকেট 01340340744; ২) সদস্যপদ অংশের রেজিস্ট্রেশন ফর্মে ট্রানজেকশন আইডিসহ তথ্য দিন; ৩) ক্লাব পেমেন্ট যাচাই করে সদস্যপদ নিশ্চিত করবে।
+উল্লেখ্য: ওয়েবসাইটটি এখন ডেমো মোডে, তাই এখানে সত্যিকারের পেমেন্ট হয় না।
+সদস্যপদ ও পেমেন্ট বিষয়ে তাঁর সাথে কথা বলুন।
+
+===== QUICK REPLY /fee (English) =====
+Membership fee: ৳350.
+How to join: 1) choose bKash, Nagad or Rocket and send ৳350 to 01340340744 (bKash) / 01340340744 (Nagad) / 01340340744 (Rocket); 2) fill in the registration form in the Membership section with your transaction ID; 3) the club verifies your payment and confirms your membership.
+Note: payments are not taken on this website; the club admin confirms your membership after you send the fee by bKash, Nagad or Rocket.
+Talk to them about membership and payment.
+
+===== QUICK REPLY /play (Bangla) =====
+এমসিএসসি-তে যেকোনো খেলা খেলার নিয়ম:
+১) খেলাধুলা অংশ থেকে খেলা বেছে নিন: ফুটবল, ক্রিকেট, হ্যান্ডবল, কাবাডি, অ্যাথলেটিক্স, সাঁতার, দাবা, ব্যাডমিন্টন।
+২) সদস্য হোন: বিকাশ, নগদ বা রকেটে 01340340744 নম্বরে ৳350 পাঠিয়ে সদস্যপদ ও পেমেন্ট অংশের ফর্ম পূরণ করুন।
+৩) সদস্যপদ নিশ্চিত হলে অনুশীলন ও ম্যাচে আসুন। অনুশীলনের সময় ও টিমের জন্য সহ-সভাপতিদের (মো. নাজমুল ইসলাম) সাথে কথা বলুন।
+৪) ম্যাচ ও টুর্নামেন্টের খবরের জন্য নোটিশ ও ইভেন্ট অংশ দেখুন।
+৫) অন্য যেকোনো বিষয়ে উপদেষ্টা রাকিবুল ইসলাম আবিদ-এর সাথে কথা বলুন।
+
+===== QUICK REPLY /play (English) =====
+How to play a sport with MCSC:
+1) Choose your sport in the Sports section: Football, Cricket, Handball, Kabaddi, Athletics, Swimming, Chess, Badminton.
+2) Become a member: send ৳350 by bKash, Nagad or Rocket to 01340340744 and fill in the form in Membership & Payment.
+3) Once your membership is confirmed, come to practice and matches. Ask the Vice Presidents (Md. Nazmul Islam) for practice times and teams.
+4) Watch the Notices and Events sections for matches and tournaments.
+5) For anything else, talk to the Advisor Rakibul Islam Abid.
+
+===== QUICK REPLY /where (Bangla) =====
+কোথায় গেলে কী পাবেন:
+• খেলাধুলা — আমরা যে ৮টি খেলা খেলি
+• নোটিশ — ক্লাবের সব ঘোষণা
+• সদস্যপদ ও পেমেন্ট — ফি, বিকাশ/নগদ/রকেট নম্বর ও ভর্তির ফর্ম
+• ক্লাব নেতৃত্ব — লিডারদের নাম
+• টুর্নামেন্ট ও ইভেন্ট — আসন্ন ইভেন্ট ও বার্ষিক প্রতিযোগিতা
+• সংবাদ ও গ্যালারি — সংবাদ ক্লিপিং ও ছবি
+• যোগাযোগ — ক্যাম্পাসের ঠিকানা, ফোন, ইমেইল ও বার্তা ফর্ম
+• ক্যাম্পাস ৩৬০° ও ট্যুর ভিডিও — পেজের উপরের অংশে
+
+আরও তথ্যের জন্য যাঁদের সাথে কথা বলবেন:
+• ক্লাব সম্পর্কে সাধারণ তথ্য: উপদেষ্টা রাকিবুল ইসলাম আবিদ অথবা সভাপতি মাহি ইসলাম প্রান্ত
+• সদস্যপদ ও পেমেন্ট: সাধারণ সম্পাদক আব্দুর রহমান মাহি অথবা যুগ্ম সম্পাদক অর্ণব মাতব্বর
+• ইভেন্ট, নোটিশ ও অনুষ্ঠান: সাংগঠনিক সম্পাদক ঋদিতা মীম
+• খেলার অনুশীলন ও টিম: সহ-সভাপতিগণ মো. নাজমুল ইসলাম
+অথবা ফোন করুন 02-48963437, 02-58957733, 01340340744, 01872402890 / ইমেইল milestonecollege1056@gmail.com।
+
+===== QUICK REPLY /where (English) =====
+Where to find what:
+• Sports — the 8 sports we play
+• Notices — all club announcements
+• Membership & Payment — fee, bKash/Nagad/Rocket numbers and the join form
+• Club Leadership — names of the leaders
+• Tournaments & Events — upcoming events and the annual competition
+• News and Gallery — press clippings and photos
+• Contact — campus address, phone, email and message form
+• Campus 360° and Tour video — at the top of the page
+
+For more information, talk to:
+• About the club (general): Advisor Rakibul Islam Abid or President Mahi Islam Pranto
+• Membership & payment: General Secretary Abdur Rahman Mahi or Joint Secretary Arnov Matabber
+• Events, notices & programmes: Organizing Secretary Ridita Mim
+• Sports practice & teams: Vice Presidents Md. Nazmul Islam
+Or call 02-48963437, 02-58957733, 01340340744, 01872402890 / email milestonecollege1056@gmail.com.
+
+===== QUICK REPLY /contact (Bangla) =====
+আরও তথ্যের জন্য যাঁদের সাথে কথা বলবেন:
+• ক্লাব সম্পর্কে সাধারণ তথ্য: উপদেষ্টা রাকিবুল ইসলাম আবিদ অথবা সভাপতি মাহি ইসলাম প্রান্ত
+• সদস্যপদ ও পেমেন্ট: সাধারণ সম্পাদক আব্দুর রহমান মাহি অথবা যুগ্ম সম্পাদক অর্ণব মাতব্বর
+• ইভেন্ট, নোটিশ ও অনুষ্ঠান: সাংগঠনিক সম্পাদক ঋদিতা মীম
+• খেলার অনুশীলন ও টিম: সহ-সভাপতিগণ মো. নাজমুল ইসলাম
+অথবা ফোন করুন 02-48963437, 02-58957733, 01340340744, 01872402890 / ইমেইল milestonecollege1056@gmail.com।
+
+===== QUICK REPLY /contact (English) =====
+For more information, talk to:
+• About the club (general): Advisor Rakibul Islam Abid or President Mahi Islam Pranto
+• Membership & payment: General Secretary Abdur Rahman Mahi or Joint Secretary Arnov Matabber
+• Events, notices & programmes: Organizing Secretary Ridita Mim
+• Sports practice & teams: Vice Presidents Md. Nazmul Islam
+Or call 02-48963437, 02-58957733, 01340340744, 01872402890 / email milestonecollege1056@gmail.com.
+
+Leader phone numbers (fill in):
+Mahi Islam Pranto (President): [number]
+Rakibul Islam Abid (Advisor): [number]
+Abdur Rahman Mahi (General Secretary): [number]
+Ridita Mim (Organizing Secretary): [number]
